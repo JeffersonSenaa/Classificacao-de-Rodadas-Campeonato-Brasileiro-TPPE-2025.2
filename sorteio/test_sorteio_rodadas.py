@@ -33,6 +33,13 @@ class TestSorteioRodadas:
         for rodada in rodadas:
             assert len(rodada) == 10
 
+    def test_total_de_380_jogos(self, times_brasileirao):
+        """Teste 4: Deve haver 380 jogos no total (38 rodadas × 10 jogos)"""
+        sorteio = SorteioRodadas(times_brasileirao)
+        rodadas = sorteio.gerar_rodadas()
+        total_jogos = sum(len(rodada) for rodada in rodadas)
+        assert total_jogos == 380
+
 class TestJogo:
     """Testes para a classe Jogo"""
     
