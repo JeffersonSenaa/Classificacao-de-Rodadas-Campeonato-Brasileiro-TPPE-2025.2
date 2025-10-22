@@ -19,3 +19,9 @@ class TestSorteioRodadas:
         """Teste 1: Deve criar um sorteio com 20 times"""
         sorteio = SorteioRodadas(times_brasileirao)
         assert len(sorteio.times) == 20
+    
+    def test_gerar_38_rodadas(self, times_brasileirao):
+        """Teste 2: Deve gerar exatamente 38 rodadas"""
+        sorteio = SorteioRodadas(times_brasileirao)
+        rodadas = sorteio.gerar_rodadas()
+        assert len(rodadas) == 38
