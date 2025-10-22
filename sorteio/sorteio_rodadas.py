@@ -1,4 +1,3 @@
-
 class Jogo:
     def __init__(self, mandante, visitante):
         self.mandante = mandante
@@ -18,7 +17,7 @@ class SorteioRodadas:
             raise ValueError("O número de times deve ser par")
         
         self.times = times.copy()
-
+    
     def gerar_rodadas(self):
         """
         Gera todas as rodadas do campeonato usando o algoritmo Round-Robin:
@@ -36,9 +35,19 @@ class SorteioRodadas:
         turno = []
         for rodada_num in range(num_rodadas_turno):
             rodada = []
+
+            for i in range(num_times // 2):
+                time_a = times_rotacao[i]
+                time_b = times_rotacao[num_times - 1 - i]
+
+                if (rodada_num + i) % 2 == 0:
+                    jogo = Jogo(time_a, time_b)
+                else:
+                    jogo = Jogo(time_b, time_a)
+                
+                rodada.append(jogo)
             
             turno.append(rodada)
             
             # Rotacionar times 
             times_rotacao = [times_rotacao[0]] + [times_rotacao[-1]] + times_rotacao[1:-1]
-
