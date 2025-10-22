@@ -25,3 +25,24 @@ class TestSorteioRodadas:
         sorteio = SorteioRodadas(times_brasileirao)
         rodadas = sorteio.gerar_rodadas()
         assert len(rodadas) == 38
+
+    def test_cada_rodada_tem_10_jogos(self, times_brasileirao):
+        """Teste 3: Cada rodada deve ter 10 jogos (20 times / 2)"""
+        sorteio = SorteioRodadas(times_brasileirao)
+        rodadas = sorteio.gerar_rodadas()
+        for rodada in rodadas:
+            assert len(rodada) == 10
+
+class TestJogo:
+    """Testes para a classe Jogo"""
+    
+    def test_criar_jogo(self):
+        """Teste 11: Deve criar um jogo com mandante e visitante"""
+        jogo = Jogo("Flamengo", "Palmeiras")
+        assert jogo.mandante == "Flamengo"
+        assert jogo.visitante == "Palmeiras"
+    
+    def test_representacao_jogo(self):
+        """Teste 12: Deve ter uma representação string legível"""
+        jogo = Jogo("Flamengo", "Palmeiras")
+        assert str(jogo) == "Flamengo vs Palmeiras"
