@@ -33,6 +33,8 @@ def gera_classificacao(times):
     """Ordena a lista de times com base nos critérios de classificação."""
     # Critérios: 
     # 1. Pontos
-    # 2. Vitórias 
-    times_ordenados = sorted(times, key=lambda time: (-time.pontos, -time.vitorias))
+    # 2. Vitórias
+    # 3. Saldo de Gols
+    # 4. Gols Marcados
+    times_ordenados = sorted(times, key=lambda time: (-time.pontos, -time.vitorias, -time.saldo_gols, -time.gols_marcados))
     return times_ordenados
