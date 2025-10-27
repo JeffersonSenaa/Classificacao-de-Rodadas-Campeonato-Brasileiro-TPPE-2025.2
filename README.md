@@ -81,3 +81,7 @@ Siga os passos abaixo para configurar o ambiente e executar os testes automatiza
       ```bash
    pytest tests/classificacao/test_classificacao.py
    ```
+
+   ## Testes Executados
+   <img width="953" height="419" alt="image" src="https://github.com/user-attachments/assets/65510486-5a6c-4744-9308-0762d0ecae4e" />
+
