@@ -7,4 +7,7 @@ class Time:
         self.derrotas = 0
         self.gols_marcados = 0
         self.gols_sofridos = 0
-        self.saldo_gols = 0
+
+    @property
+    def saldo_gols(self):
+        return self.gols_marcados - self.gols_sofridos
