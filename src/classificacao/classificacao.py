@@ -28,3 +28,11 @@ def processa_rodada(partidas):
             visitante.pontos += 1
             mandante.empates += 1
             visitante.empates += 1
+
+def gera_classificacao(times):
+    """Ordena a lista de times com base nos critérios de classificação."""
+    # Critérios: 
+    # 1. Pontos
+    # 2. Vitórias 
+    times_ordenados = sorted(times, key=lambda time: (-time.pontos, -time.vitorias))
+    return times_ordenados
