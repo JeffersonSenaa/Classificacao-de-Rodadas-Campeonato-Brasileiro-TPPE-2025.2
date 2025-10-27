@@ -1,5 +1,16 @@
 # Classificacao-de-Rodadas-Campeonato-Brasileiro-TPPE-2025.2
-Classificação de Rodadas do Campeonato Brasileiro - Trabalho Prático TPPE - 2025.2
+
+## Requisitos
+
+- Python 3.12
+- Pytest
+
+## Integrantes
+
+- Felipe Aguiar Hansen - 222032810
+- Gabriel Barbosa Alencar - 200049020
+- Jefferson Sena Oliveira - 200020323
+- Tiago Albuquerque de Lima - 202028973
 
 ## Estrutura do Projeto
 
@@ -7,32 +18,66 @@ Para garantir a organização, manutenibilidade e escalabilidade do código, o p
 
 ```
 /
-├── .gitignore               # Arquivo para ignorar arquivos e diretórios do Git
-├── README.md                # Documentação do projeto
-├── Roteiro.md               # Enunciado e requisitos do trabalho
-├── requirements.txt         # Dependências do projeto Python
+├── .gitignore               
+├── README.md                
+├── Roteiro.md               
+├── requirements.txt         
 │
-├── src/                     # Diretório principal do código-fonte
+├── src/                     
 │   ├── __init__.py
 │   │
-│   ├── classificacao/       # Módulo para lógica de classificação e pontuação
+│   ├── classificacao/       
 │   │   ├── __init__.py
-│   │   ├── time.py          # Classe que representa um time e suas estatísticas
-│   │   └── classificacao.py # Funções para processar rodadas e gerar a tabela
+│   │   ├── time.py          
+│   │   └── classificacao.py 
 │   │
-│   └── sorteio/             # Módulo para lógica de sorteio das rodadas
+│   └── sorteio/             
 │       ├── __init__.py
-│       └── sorteio.py       # Funções para gerar as rodadas do campeonato
+│       └── sorteio.py       
 │
-└── tests/                   # Diretório para os casos de teste (estrutura espelhada)
+└── tests/                   
     ├── __init__.py
     │
-    ├── classificacao/       # Testes para o módulo de classificação
+    ├── classificacao/       
     │   ├── __init__.py
     │   └── test_classificacao.py
     │
-    └── sorteio/             # Testes para o módulo de sorteio
+    └── sorteio/             
         ├── __init__.py
         └── test_sorteio.py
 
 ```
+
+## Como Executar os Testes
+
+Siga os passos abaixo para configurar o ambiente e executar os testes automatizados do projeto.
+
+2. **Crie e ative uma venv:**
+   ```bash
+   # Crie o ambiente virtual
+   python3 -m venv .venv
+
+   # Ative o ambiente virtual
+   source .venv/bin/activate
+   ```
+
+3. **Instale as dependências:**
+   Instale as dependências do `requirements.txt`.
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Execute os testes:**
+   Execute o comando `pytest` na raiz do diretório.
+   ```bash
+   pytest
+   ```
+
+   Para executar os testes de um arquivo específico, passe o caminho do arquivo como argumento:
+   ```bash
+   pytest tests/sorteio/test_sorteio_rodadas.py
+   ```
+   ou
+      ```bash
+   pytest tests/classificacao/test_classificacao.py
+   ```
