@@ -40,6 +40,47 @@ class TestSorteioRodadas:
         total_jogos = sum(len(rodada) for rodada in rodadas)
         assert total_jogos == 380
 
+    def test_nao_existem_jogos_duplicados(self, times_brasileirao):
+        """
+        Teste 5: Não deve existir dois jogos iguais ao longo das rodadas.
+        Um jogo é considerado igual quando tem o mesmo mandante e visitante.
+        """
+        sorteio = SorteioRodadas(times_brasileirao)
+        rodadas = sorteio.gerar_rodadas()
+        
+        jogos_vistos = set()
+        for rodada in rodadas:
+            for jogo in rodada:
+                # Identificador de jogo
+                identificador = (jogo.mandante, jogo.visitante)
+                assert identificador not in jogos_vistos, \
+                    f"Jogo duplicado: {jogo.mandante} vs {jogo.visitante}"
+                jogos_vistos.add(identificador)
+
+    def test_cada_time_joga_duas_vezes_contra_cada_adversario(self, times_brasileirao):
+        """
+        Teste 6: Cada time deve jogar duas vezes contra cada adversário
+        (uma como mandante e outra como visitante)
+        """
+        sorteio = SorteioRodadas(times_brasileirao)
+        rodadas = sorteio.gerar_rodadas()
+        
+        # contar confrontos
+        confrontos = {}
+        
+        for rodada in rodadas:
+            for jogo in rodada:
+                times_confronto = tuple(sorted([jogo.mandante, jogo.visitante]))
+                
+                if times_confronto not in confrontos:
+                    confrontos[times_confronto] = 0
+                confrontos[times_confronto] += 1
+        
+        # Limitador - Cada par de times deve se enfrentar exatamente 2 vezes
+        for times_confronto, quantidade in confrontos.items():
+            assert quantidade == 2, \
+                f"Times {times_confronto[0]} e {times_confronto[1]} se enfrentaram {quantidade} vezes"
+
 class TestJogo:
     """Testes para a classe Jogo"""
     
