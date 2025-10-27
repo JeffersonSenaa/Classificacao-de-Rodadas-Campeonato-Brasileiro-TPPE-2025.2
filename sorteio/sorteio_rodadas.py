@@ -51,3 +51,24 @@ class SorteioRodadas:
             
             # Rotacionar times 
             times_rotacao = [times_rotacao[0]] + [times_rotacao[-1]] + times_rotacao[1:-1]
+
+        # Criar o returno invertendo mandante e visitante
+        returno = []
+        for rodada in turno:
+            rodada_returno = []
+            for jogo in rodada:
+                # Inverte mandante e visitante
+                jogo_returno = Jogo(jogo.visitante, jogo.mandante)
+                rodada_returno.append(jogo_returno)
+            returno.append(rodada_returno)
+        
+        # Retornar turno + returno (38 rodadas)
+        return turno + returno
+    
+    def exibir_rodadas(self, rodadas):
+        for i, rodada in enumerate(rodadas, 1):
+            print(f"\n{'='*50}")
+            print(f"RODADA {i}")
+            print(f"{'='*50}")
+            for jogo in rodada:
+                print(f"  {jogo}")
