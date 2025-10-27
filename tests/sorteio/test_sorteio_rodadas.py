@@ -1,5 +1,5 @@
 import pytest
-from sorteio_rodadas import SorteioRodadas, Jogo
+from src.sorteio.sorteio_rodadas import SorteioRodadas, Jogo
 
 class TestSorteioRodadas:
     """Testes para a classe SorteioRodadas"""
