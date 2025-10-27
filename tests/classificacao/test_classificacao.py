@@ -51,10 +51,51 @@ class TestCriteriosDesempate(unittest.TestCase):
         time_b.pontos = 3
         time_b.vitorias = 0
         
-        times = [time_b, time_a]  # Desordenado propositalmente
+        times = [time_b, time_a]  # Desordenado
         
         classificacao = gera_classificacao(times)
         
+        self.assertEqual(classificacao[0].nome, "Time A")
+        self.assertEqual(classificacao[1].nome, "Time B")
+
+    def test_desempate_por_saldo_de_gols(self):
+        """Teste para verificar o critério de desempate por saldo de gols."""
+        time_a = Time("Time A")
+        time_a.pontos = 3
+        time_a.vitorias = 1
+        time_a.gols_marcados = 5
+        time_a.gols_sofridos = 2  # Saldo: +3
+
+        time_b = Time("Time B")
+        time_b.pontos = 3
+        time_b.vitorias = 1
+        time_b.gols_marcados = 4
+        time_b.gols_sofridos = 2  # Saldo: +2
+
+        times = [time_b, time_a] # Desordenado
+
+        classificacao = gera_classificacao(times)
+
+        self.assertEqual(classificacao[0].nome, "Time A")
+        self.assertEqual(classificacao[1].nome, "Time B")
+
+    def test_desempate_por_gols_marcados(self):
+        """Teste para o critério de desempate por gols marcados."""
+        time_a = Time("Time A")
+        time_a.pontos = 3
+        time_a.vitorias = 1
+        time_a.gols_marcados = 5
+        time_a.gols_sofridos = 2  # Saldo: +3
+
+        time_b = Time("Time B")
+        time_b.pontos = 3
+        time_b.vitorias = 1
+        time_b.gols_marcados = 4
+        time_b.gols_sofridos = 1  # Saldo: +3
+
+        times = [time_b, time_a] # Desordenado
+
+        classificacao = gera_classificacao(times)
         self.assertEqual(classificacao[0].nome, "Time A")
         self.assertEqual(classificacao[1].nome, "Time B")
 
