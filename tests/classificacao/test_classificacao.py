@@ -20,6 +20,32 @@ class TestCalculoPontuacao(unittest.TestCase):
         self.assertEqual(time_a.pontos, 3)
         self.assertEqual(time_b.pontos, 0)
 
+    def test_empate_atribui_1_ponto_a_ambos(self):
+        """Teste para verificar a atribuição de 1 ponto para empate."""
+        time_a = Time("Time A")
+        time_b = Time("Time B")
+        partida = {"mandante": time_a, "visitante": time_b, "gols_mandante": 1, "gols_visitante": 1}
+
+        processa_rodada([partida])
+
+        self.assertEqual(time_a.pontos, 1)
+        self.assertEqual(time_b.pontos, 1)
+        self.assertEqual(time_a.empates, 1)
+        self.assertEqual(time_b.empates, 1)
+
+    def test_vitoria_visitante_atribui_3_pontos(self):
+        """Teste para verificar a atribuição de 3 pontos para vitória do visitante."""
+        time_a = Time("Time A")
+        time_b = Time("Time B")
+        partida = {"mandante": time_a, "visitante": time_b, "gols_mandante": 0, "gols_visitante": 2}
+
+        processa_rodada([partida])
+
+        self.assertEqual(time_b.pontos, 3)
+        self.assertEqual(time_a.pontos, 0)
+        self.assertEqual(time_b.vitorias, 1)
+        self.assertEqual(time_a.derrotas, 1)
+
 class TestCalculoEstatisticas(unittest.TestCase):
 
     def test_calcula_estatisticas_uma_partida(self):
