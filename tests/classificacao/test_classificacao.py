@@ -49,7 +49,7 @@ class TestCalculoPontuacao(unittest.TestCase):
 class TestCalculoEstatisticas(unittest.TestCase):
 
     def test_calcula_estatisticas_uma_partida(self):
-        """Teste para verificar o cálculo de vitórias, gols e saldo."""
+        """Teste para verificar o cálculo de vitórias, gols e saldo para uma partida."""
         time_a = Time("Time A")
         time_b = Time("Time B")
         partida = {"mandante": time_a, "visitante": time_b, "gols_mandante": 3, "gols_visitante": 1}
@@ -64,6 +64,25 @@ class TestCalculoEstatisticas(unittest.TestCase):
         self.assertEqual(time_b.gols_marcados, 1)
         self.assertEqual(time_b.gols_sofridos, 3)
         self.assertEqual(time_b.saldo_gols, -2)
+
+    def test_calcula_estatisticas_acumuladas(self):
+        """Teste para verificar o acúmulo de estatísticas em múltiplas partidas."""
+        time_a = Time("Time A")
+        time_b = Time("Time B")
+        time_c = Time("Time C")
+
+        # Rodada 1: Time A (3) x (1) Time B
+        partida1 = {"mandante": time_a, "visitante": time_b, "gols_mandante": 3, "gols_visitante": 1}
+        # Rodada 2: Time C (0) x (2) Time A
+        partida2 = {"mandante": time_c, "visitante": time_a, "gols_mandante": 0, "gols_visitante": 2}
+
+        processa_rodada([partida1, partida2])
+
+        self.assertEqual(time_a.vitorias, 2)
+        self.assertEqual(time_a.pontos, 6)
+        self.assertEqual(time_a.gols_marcados, 5) # 3 + 2
+        self.assertEqual(time_a.gols_sofridos, 1) # 1 + 0
+        self.assertEqual(time_a.saldo_gols, 4)
 
 class TestCriteriosDesempate(unittest.TestCase):
 
