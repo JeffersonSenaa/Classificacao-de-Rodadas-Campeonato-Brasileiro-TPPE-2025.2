@@ -1,17 +1,11 @@
 import unittest
+import sys
+import os
 
-class Time:
-    def __init__(self, nome, pontos=0, vitorias=0, gols_marcados=0, gols_sofridos=0):
-        self.nome = nome
-        self.pontos = pontos
-        self.vitorias = vitorias
-        self.gols_marcados = gols_marcados
-        self.gols_sofridos = gols_sofridos
-        self.saldo_gols = gols_marcados - gols_sofridos
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-def processa_rodada(partidas):
-    # Função será implementada
-    pass
+from src.classificacao.time import Time
+from src.classificacao.classificacao import processa_rodada
 
 def gera_classificacao(times):
     # Função será implementada
@@ -26,10 +20,6 @@ class TestCalculoPontuacao(unittest.TestCase):
         partida = {"mandante": time_a, "visitante": time_b, "gols_mandante": 2, "gols_visitante": 0}
         
         processa_rodada([partida])
-        
-        # Define os pontos inivialemnte como 0
-        time_a.pontos = 0 # Forçando a falha, esperando 3
-        time_b.pontos = 0
         
         self.assertEqual(time_a.pontos, 3)
         self.assertEqual(time_b.pontos, 0)
@@ -57,8 +47,13 @@ class TestCriteriosDesempate(unittest.TestCase):
 
     def test_desempate_por_vitorias(self):
         """Teste para verificar o critério de desempate por número de vitórias."""
-        time_a = Time("Time A", pontos=3, vitorias=1)
-        time_b = Time("Time B", pontos=3, vitorias=0)
+        time_a = Time("Time A")
+        time_a.pontos = 3
+        time_a.vitorias = 1
+        
+        time_b = Time("Time B")
+        time_b.pontos = 3
+        time_b.vitorias = 0
         
         times = [time_b, time_a]  # Desordenado propositalmente
         
