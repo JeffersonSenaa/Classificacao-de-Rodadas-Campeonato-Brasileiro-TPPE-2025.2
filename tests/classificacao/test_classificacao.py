@@ -4,8 +4,8 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from src.classificacao.time import Time
-from src.classificacao.classificacao import processa_rodada, gera_classificacao
+from src.time.time import Time
+from src.classificacao.classificacao import processa_rodada
 
 class TestCalculoPontuacao(unittest.TestCase):
 
@@ -98,7 +98,7 @@ class TestCriteriosDesempate(unittest.TestCase):
         
         times = [time_b, time_a]  # Desordenado
         
-        classificacao = gera_classificacao(times)
+        classificacao = Time.gera_classificacao(times)
         
         self.assertEqual(classificacao[0].nome, "Time A")
         self.assertEqual(classificacao[1].nome, "Time B")
@@ -119,7 +119,7 @@ class TestCriteriosDesempate(unittest.TestCase):
 
         times = [time_b, time_a] # Desordenado
 
-        classificacao = gera_classificacao(times)
+        classificacao = Time.gera_classificacao(times)
 
         self.assertEqual(classificacao[0].nome, "Time A")
         self.assertEqual(classificacao[1].nome, "Time B")
@@ -140,7 +140,7 @@ class TestCriteriosDesempate(unittest.TestCase):
 
         times = [time_b, time_a] # Desordenado
 
-        classificacao = gera_classificacao(times)
+        classificacao = Time.gera_classificacao(times)
         self.assertEqual(classificacao[0].nome, "Time A")
         self.assertEqual(classificacao[1].nome, "Time B")
 
